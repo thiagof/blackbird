@@ -51,6 +51,9 @@ Parameters::Parameters(std::string fileName) {
   poloniexApi = getParameter("PoloniexApiKey", configFile);
   poloniexSecret = getParameter("PoloniexSecretKey", configFile);
   poloniexFees = getDouble(getParameter("PoloniexFees", configFile));
+  foxbitApi = getParameter("FoxbitApiKey", configFile);
+  foxbitSecret = getParameter("FoxbitSecretKey", configFile);
+  foxbitFees = getDouble(getParameter("FoxbitFees", configFile));
 
   sendEmail = getBool(getParameter("SendEmail", configFile));
   senderAddress = getParameter("SenderAddress", configFile);

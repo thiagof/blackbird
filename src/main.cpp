@@ -24,6 +24,7 @@
 #include "itbit.h"
 #include "btce.h"
 #include "poloniex.h"
+#include "foxbit.h"
 #include "sevennintysix.h"
 #include "send_email.h"
 
@@ -190,6 +191,21 @@ int main(int argc, char** argv) {
     getLimitPrice[index] = Poloniex::getLimitPrice;
     if (params.useDatabase) {
       dbTableName[index] = "poloniex";
+      createTable(dbTableName[index], params);
+    }
+    index++;
+  }
+  if (params.foxbitApi.empty() == false || params.demoMode == true) {
+    params.addExchange("Foxbit", params.foxbitFees, false, false);
+    getQuote[index] = Foxbit::getQuote;
+    getAvail[index] = Foxbit::getAvail;
+    sendLongOrder[index] = Foxbit::sendLongOrder;
+    sendShortOrder[index] = Foxbit::sendShortOrder;
+    isOrderComplete[index] = Foxbit::isOrderComplete;
+    getActivePos[index] = Foxbit::getActivePos;
+    getLimitPrice[index] = Foxbit::getLimitPrice;
+    if (params.useDatabase) {
+      dbTableName[index] = "foxbit";
       createTable(dbTableName[index], params);
     }
     index++;

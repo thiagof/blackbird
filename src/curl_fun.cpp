@@ -34,9 +34,16 @@ json_t* getJsonFromUrl(Parameters& params, std::string url, std::string postFiel
     curl_easy_setopt(params.curl, CURLOPT_DNS_CACHE_TIMEOUT, 0);
     resCurl = curl_easy_perform(params.curl);
   }
+
+  const char* gfinance = "http://www.google.com/finance";
+  if (strcmp(url.substr(0, strlen(gfinance)).c_str(), gfinance) == 0) {
+    readBuffer = readBuffer.substr(3, -1);
+  }
+
   json_t* root;
   json_error_t error;
   root = json_loads(readBuffer.c_str(), 0, &error);
+
   while (!root) {
     *params.logFile << "Error with JSON:\n" << error.text << std::endl;
     *params.logFile << "Buffer:\n" << readBuffer.c_str() << std::endl;
@@ -54,6 +61,7 @@ json_t* getJsonFromUrl(Parameters& params, std::string url, std::string postFiel
     }
     root = json_loads(readBuffer.c_str(), 0, &error);
   }
+
   return root;
 }
 
