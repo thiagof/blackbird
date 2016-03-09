@@ -11,6 +11,10 @@
 #include "foxbit.h"
 #include "curl_fun.h"
 
+/**
+ * https://vbtc.vn/apidoc
+ */
+
 namespace Foxbit {
 
 double getQuote(Parameters& params, bool isBid) {
